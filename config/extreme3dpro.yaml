@@ -1,0 +1,36 @@
+# ══════════════════════════════════════════════════════════════
+#  extreme3dpro_driver — parameter config
+#  Logitech Extreme 3D Pro joystick
+# ══════════════════════════════════════════════════════════════
+
+extreme3dpro_driver:
+  ros__parameters:
+
+    # ── Device ──────────────────────────────────────────────
+    device: "/dev/input/js0"       # Linux joystick device path
+    publish_rate: 100.0             # Hz — how often Joy / Twist are published
+    deadzone: 0.02                 # axis dead‑zone (0.0 – 1.0)
+    autorepeat: true               # keep publishing even if no new events
+
+    # ── Twist output ────────────────────────────────────────
+    publish_twist: true            # also publish geometry_msgs/Twist on /cmd_vel
+    linear_scale: 1.0              # m/s  at full deflection
+    angular_scale: 1.0             # rad/s at full deflection
+
+    # ── Axis mapping (Linux evdev indices) ──────────────────
+    #   Extreme 3D Pro default:
+    #     0 = X (roll)       → linear.y   (strafe)
+    #     1 = Y (pitch)      → linear.x   (fwd/back)
+    #     2 = Rz (twist)     → angular.z  (yaw)
+    #     3 = Throttle       → linear.z   (up/down)
+    #     4 = Hat X           (not mapped to twist by default)
+    #     5 = Hat Y           (not mapped to twist by default)
+    axis_x: 0
+    axis_y: 1
+    axis_yaw: 2
+    axis_throttle: 3
+
+    # ── Deadman switch ──────────────────────────────────────
+    #   Button that must be held for cmd_vel to be non‑zero.
+    #   0 = trigger (index finger), set to -1 to disable.
+    deadman_btn: 0
