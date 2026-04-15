@@ -100,7 +100,3 @@ sudo usermod -aG input $USER
 # Log out and back in, then verify:
 ls -la /dev/input/js0
 ```
-
-## License
-
-MIT
