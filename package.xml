@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <n>extreme3dpro_driver</n>
+  <version>1.0.0</version>
+  <description>
+    ROS 1 Noetic driver for the Logitech Extreme 3D Pro joystick.
+  </description>
+
+  <maintainer email="dev@example.com">Developer</maintainer>
+  <license>Apache-2</license>
+
+  <url type="repository">https://github.com/YOUR_USERNAME/extreme3dpro_driver</url>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <depend>roscpp</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
+
+  <test_depend>rostest</test_depend>
+</package>

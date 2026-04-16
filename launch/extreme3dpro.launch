@@ -1,0 +1,24 @@
+<launch>
+  <node pkg="extreme3dpro_driver"
+        type="extreme3dpro_node"
+        name="extreme3dpro_driver"
+        output="screen">
+
+    <param name="device"        value="/dev/input/js0" />
+    <param name="publish_rate"  value="50.0" />
+    <param name="deadzone"      value="0.05" />
+    <param name="autorepeat"    value="true" />
+    <param name="publish_twist" value="true" />
+    <param name="linear_scale"  value="1.0" />
+    <param name="angular_scale" value="1.0" />
+    <param name="axis_x"        value="0" />
+    <param name="axis_y"        value="1" />
+    <param name="axis_yaw"      value="2" />
+    <param name="axis_throttle" value="3" />
+    <param name="deadman_btn"   value="0" />
+
+    <remap from="joy"     to="/joy" />
+    <remap from="cmd_vel" to="/cmd_vel" />
+    <remap from="deadman" to="/deadman" />
+  </node>
+</launch>

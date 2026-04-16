@@ -1,0 +1,14 @@
+device: "/dev/input/js0"
+publish_rate: 50.0
+deadzone: 0.05
+autorepeat: true
+
+publish_twist: true
+linear_scale: 1.0
+angular_scale: 1.0
+
+axis_x: 0
+axis_y: 1
+axis_yaw: 2
+axis_throttle: 3
+deadman_btn: 0

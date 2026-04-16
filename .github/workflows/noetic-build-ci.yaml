@@ -1,0 +1,48 @@
+name: Noetic Build
+
+on:
+  push:
+    branches: [ ros1 ]
+  pull_request:
+    branches: [ ros1 ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    container:
+      image: ros:noetic-ros-base-focal
+    steps:
+      - name: Install deps
+        run: |
+          apt-get update && apt-get install -y \
+            python3-catkin-tools \
+            python3-rosdep \
+            git
+
+      - uses: actions/checkout@v4
+
+      - name: Setup workspace
+        run: |
+          mkdir -p /catkin_ws/src
+          cp -r $GITHUB_WORKSPACE /catkin_ws/src/extreme3dpro_driver
+
+      - name: rosdep install
+        run: |
+          . /opt/ros/noetic/setup.sh
+          cd /catkin_ws
+          rosdep update --rosdistro=noetic
+          rosdep install --from-paths src --ignore-src -r -y
+
+      - name: Build
+        run: |
+          . /opt/ros/noetic/setup.sh
+          cd /catkin_ws
+          catkin_make --cmake-args -DCMAKE_BUILD_TYPE=Release
+
+      - name: Run tests
+        run: |
+          . /opt/ros/noetic/setup.sh
+          cd /catkin_ws
+          catkin_make run_tests
+          catkin_test_results
