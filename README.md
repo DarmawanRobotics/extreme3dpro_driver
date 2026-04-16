@@ -1,15 +1,15 @@
 # extreme3dpro_driver
 
-[![Foxy Build](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/foxy-build-ci.yaml/badge.svg)](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/foxy-build-ci.yaml)
-[![Humble Build](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/humble-build-ci.yaml/badge.svg)](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/humble-build-ci.yaml)
-[![Iron Build](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/iron-build-ci.yaml/badge.svg)](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/iron-build-ci.yaml)
-[![Jazzy Build](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/jazzy-build-ci.yaml/badge.svg)](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/jazzy-build-ci.yaml)
-[![Rolling Build](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/rolling-build-ci.yaml/badge.svg)](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/rolling-build-ci.yaml)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Foxy Build](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/foxy-build-ci.yaml/badge.svg)](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/foxy-build-ci.yaml)
+[![Humble Build](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/humble-build-ci.yaml/badge.svg)](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/humble-build-ci.yaml)
+[![Iron Build](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/iron-build-ci.yaml/badge.svg)](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/iron-build-ci.yaml)
+[![Jazzy Build](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/jazzy-build-ci.yaml/badge.svg)](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/jazzy-build-ci.yaml)
+[![Rolling Build](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/rolling-build-ci.yaml/badge.svg)](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/rolling-build-ci.yaml)
+[![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
 ROS 2 driver for the **Logitech Extreme 3D Pro** joystick. Reads raw Linux joystick events and publishes standard ROS messages.
 
-> Looking for ROS 1 Noetic? Switch to the [`ros1` branch](https://github.com/YOUR_USERNAME/extreme3dpro_driver/tree/ros1).
+> Looking for ROS 1 Noetic? Switch to the [`ros1` branch](https://github.com/DarmawanRobotics/extreme3dpro_driver/tree/ros1).
 
 ## Branch Strategy
 
@@ -52,7 +52,7 @@ sudo apt install ros-${ROS_DISTRO}-extreme3dpro-driver
 
 ```bash
 cd ~/ros2_ws/src
-git clone https://github.com/YOUR_USERNAME/extreme3dpro_driver.git
+git clone https://github.com/DarmawanRobotics/extreme3dpro_driver.git
 cd ~/ros2_ws
 rosdep install --from-paths src --ignore-src -r -y
 colcon build --packages-select extreme3dpro_driver
@@ -130,7 +130,7 @@ git push origin 1.0.0
 ```bash
 # Ini akan buat release repo di GitHub kamu
 bloom-release --rosdistro humble --track humble \
-  --repo https://github.com/YOUR_USERNAME/extreme3dpro_driver.git \
+  --repo https://github.com/DarmawanRobotics/extreme3dpro_driver.git \
   extreme3dpro_driver
 
 # Untuk semua distro sekaligus:
@@ -148,17 +148,17 @@ done
 extreme3dpro_driver:
   doc:
     type: git
-    url: https://github.com/YOUR_USERNAME/extreme3dpro_driver.git
+    url: https://github.com/DarmawanRobotics/extreme3dpro_driver.git
     version: main
   release:
     packages: [extreme3dpro_driver]
     tags:
       release: release/humble/{package}/{version}
-    url: https://github.com/YOUR_USERNAME/extreme3dpro_driver-release.git
+    url: https://github.com/DarmawanRobotics/extreme3dpro_driver-release.git
     version: 1.0.0-1
   source:
     type: git
-    url: https://github.com/YOUR_USERNAME/extreme3dpro_driver.git
+    url: https://github.com/DarmawanRobotics/extreme3dpro_driver.git
     version: main
   status: developed
 ```
@@ -181,7 +181,7 @@ git init
 git add -A
 git commit -m "feat: extreme3dpro_driver for ROS 2 (Foxy–Rolling)"
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/extreme3dpro_driver.git
+git remote add origin https://github.com/DarmawanRobotics/extreme3dpro_driver.git
 git push -u origin main
 
 # ── ros1 branch (Noetic) ─────────────────────────────────────
