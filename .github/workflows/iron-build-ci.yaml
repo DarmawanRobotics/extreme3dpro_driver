@@ -1,0 +1,50 @@
+name: Iron Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    container:
+      image: ros:iron-ros-base-jammy
+    steps:
+      - name: Install deps
+        run: |
+          apt-get update && apt-get install -y \
+            python3-colcon-common-extensions \
+            python3-rosdep \
+            git
+
+      - uses: actions/checkout@v4
+
+      - name: Setup workspace
+        run: |
+          mkdir -p /ros2_ws/src
+          cp -r $GITHUB_WORKSPACE /ros2_ws/src/extreme3dpro_driver
+
+      - name: rosdep install
+        run: |
+          . /opt/ros/iron/setup.sh
+          cd /ros2_ws
+          rosdep update --rosdistro=iron
+          rosdep install --from-paths src --ignore-src -r -y
+
+      - name: Build
+        run: |
+          . /opt/ros/iron/setup.sh
+          cd /ros2_ws
+          colcon build --packages-select extreme3dpro_driver \
+            --cmake-args -DCMAKE_BUILD_TYPE=Release
+
+      - name: Test
+        run: |
+          . /opt/ros/iron/setup.sh
+          cd /ros2_ws
+          . install/setup.sh
+          colcon test --packages-select extreme3dpro_driver
+          colcon test-result --verbose
