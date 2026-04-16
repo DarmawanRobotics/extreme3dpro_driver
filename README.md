@@ -1,9 +1,9 @@
 # extreme3dpro_driver (ROS 1 Noetic)
 
-[![Noetic Build](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/noetic-build-ci.yaml/badge.svg?branch=ros1)](https://github.com/YOUR_USERNAME/extreme3dpro_driver/actions/workflows/noetic-build-ci.yaml)
+[![Noetic Build](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/noetic-build-ci.yaml/badge.svg?branch=ros1)](https://github.com/DarmawanRobotics/extreme3dpro_driver/actions/workflows/noetic-build-ci.yaml)
 [![License: Apache-2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-> **This is the `ros1` branch.** For ROS 2 (Foxy–Rolling), switch to [`main`](https://github.com/YOUR_USERNAME/extreme3dpro_driver/tree/main).
+> **This is the `ros1` branch.** For ROS 2 (Foxy–Rolling), switch to [`main`](https://github.com/DarmawanRobotics/extreme3dpro_driver/tree/main).
 
 ROS 1 Noetic driver for the **Logitech Extreme 3D Pro** joystick.
 
@@ -12,7 +12,7 @@ ROS 1 Noetic driver for the **Logitech Extreme 3D Pro** joystick.
 ```bash
 # From source
 cd ~/catkin_ws/src
-git clone -b ros1 https://github.com/YOUR_USERNAME/extreme3dpro_driver.git
+git clone -b ros1 https://github.com/DarmawanRobotics/extreme3dpro_driver.git
 cd ~/catkin_ws
 rosdep install --from-paths src --ignore-src -r -y
 catkin_make

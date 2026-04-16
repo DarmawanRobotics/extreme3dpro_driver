@@ -9,7 +9,7 @@
   <maintainer email="dev@example.com">Developer</maintainer>
   <license>Apache-2</license>
 
-  <url type="repository">https://github.com/YOUR_USERNAME/extreme3dpro_driver</url>
+  <url type="repository">https://github.com/DarmawanRobotics/extreme3dpro_driver</url>
 
   <buildtool_depend>catkin</buildtool_depend>
 
