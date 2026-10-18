@@ -1,37 +1,31 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
-
 <package format="3">
   <name>extreme3dpro_driver</name>
-  <version>0.1.0</version>
-
-  <description>
-    ROS 2 driver for Logitech Extreme 3D Pro joystick.
-    Reads raw HID/evdev input and publishes sensor_msgs/Joy
-    and geometry_msgs/Twist messages.
-  </description>
-
+  <version>0.2.0</version>
+  <description>ROS 1 and ROS 2 driver for the Logitech Extreme 3D Pro joystick: Joy, cmd_vel with a deadman, reconnects after an unplug.</description>
   <maintainer email="darmawandeveloper@gmail.com">Agus Darmawan</maintainer>
+  <license>Apache-2.0</license>
+  <url type="repository">https://github.com/DarmawanRobotics/extreme3dpro_driver</url>
 
-  <license>Apache-2</license>
+  <buildtool_depend condition="$ROS_VERSION == 1">catkin</buildtool_depend>
+  <buildtool_depend condition="$ROS_VERSION == 2">ament_cmake</buildtool_depend>
 
-  <!-- Build system -->
-  <buildtool_depend>ament_cmake</buildtool_depend>
-
-  <!-- Runtime dependencies -->
-  <depend>rclcpp</depend>
+  <depend condition="$ROS_VERSION == 1">roscpp</depend>
+  <depend condition="$ROS_VERSION == 2">rclcpp</depend>
   <depend>sensor_msgs</depend>
   <depend>geometry_msgs</depend>
   <depend>std_msgs</depend>
 
-  <!-- Optional but recommended -->
-  <exec_depend>joy</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 1">roslaunch</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">launch_ros</exec_depend>
+  <exec_depend condition="$ROS_VERSION == 2">python3-yaml</exec_depend>
 
-  <!-- Testing -->
-  <test_depend>ament_lint_auto</test_depend>
-  <test_depend>ament_lint_common</test_depend>
+  <test_depend condition="$ROS_VERSION == 1">rosunit</test_depend>
+  <test_depend condition="$ROS_VERSION == 2">ament_cmake_gtest</test_depend>
 
   <export>
-    <build_type>ament_cmake</build_type>
+    <build_type condition="$ROS_VERSION == 1">catkin</build_type>
+    <build_type condition="$ROS_VERSION == 2">ament_cmake</build_type>
   </export>
 </package>

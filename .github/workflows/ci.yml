@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: ${{ matrix.distro }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro: [noetic, foxy, humble, jazzy]
+    container:
+      image: ros:${{ matrix.distro }}-ros-base
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: src/extreme3dpro_driver
+
+      - name: Dependencies
+        run: |
+          source /opt/ros/${{ matrix.distro }}/setup.bash
+          apt-get update -qq
+          eol=""; case ${{ matrix.distro }} in noetic|foxy) eol=--include-eol-distros;; esac
+          rosdep update --rosdistro ${{ matrix.distro }} $eol
+          rosdep install --from-paths src --ignore-src -y --rosdistro ${{ matrix.distro }}
+
+      - name: Build and test (ROS 1)
+        if: matrix.distro == 'noetic'
+        run: |
+          source /opt/ros/noetic/setup.bash
+          run() { "$@" > out.txt 2>&1 || { grep -iE 'error|fail' out.txt | tail -15 | sed 's/^/::error::/'; tail -20 out.txt; exit 1; }; cat out.txt; }
+          run catkin_make
+          run catkin_make run_tests
+          run catkin_test_results build/test_results --verbose
+
+      - name: Build and test (ROS 2)
+        if: matrix.distro != 'noetic'
+        run: |
+          source /opt/ros/${{ matrix.distro }}/setup.bash
+          colcon build --event-handlers console_direct+
+          colcon test --event-handlers console_direct+
+          colcon test-result --verbose
