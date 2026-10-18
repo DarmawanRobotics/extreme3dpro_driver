@@ -32,7 +32,7 @@ if("$ENV{ROS_VERSION}" STREQUAL "1")
 
   if(CATKIN_ENABLE_TESTING)
     catkin_add_gtest(test_extreme3dpro test/test_core.cpp)
-    target_link_libraries(test_extreme3dpro extreme3dpro_core)
+    target_link_libraries(test_extreme3dpro extreme3dpro_core gtest_main)
   endif()
 
 else()
