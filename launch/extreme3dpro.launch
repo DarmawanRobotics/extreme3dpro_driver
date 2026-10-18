@@ -1,0 +1,9 @@
+<launch>
+  <arg name="device" default="/dev/input/js0"/>
+  <arg name="config" default="$(find extreme3dpro_driver)/config/extreme3dpro.yaml"/>
+
+  <node pkg="extreme3dpro_driver" type="extreme3dpro_node" name="extreme3dpro_driver" output="screen">
+    <rosparam command="load" file="$(arg config)"/>
+    <param name="device" value="$(arg device)"/>
+  </node>
+</launch>

@@ -1,36 +1,24 @@
-# ══════════════════════════════════════════════════════════════
-#  extreme3dpro_driver — parameter config
-#  Logitech Extreme 3D Pro joystick
-# ══════════════════════════════════════════════════════════════
+# extreme3dpro_driver parameters (ROS 1 and ROS 2)
 
-extreme3dpro_driver:
-  ros__parameters:
+device: /dev/input/js0      # joystick device (ls /dev/input/js*)
+frame_id: extreme3dpro      # Joy header
+publish_rate: 50.0          # Hz
+reconnect_sec: 1.0          # retry period while the joystick is unplugged
+autorepeat: true            # publish every period, also without new events
+deadzone: 0.05              # 0..1, applied to Joy axes and cmd_vel
 
-    # ── Device ──────────────────────────────────────────────
-    device: "/dev/input/js0"       # Linux joystick device path
-    publish_rate: 100.0             # Hz — how often Joy / Twist are published
-    deadzone: 0.02                 # axis dead‑zone (0.0 – 1.0)
-    autorepeat: true               # keep publishing even if no new events
+# cmd_vel
+publish_twist: true
+linear_scale: 1.0           # m/s at full deflection
+angular_scale: 1.0          # rad/s at full twist
+throttle_mode: scale        # scale: slider scales cmd_vel (back 0, forward 1)
+                            # linear_z: slider is linear.z · none: ignored
 
-    # ── Twist output ────────────────────────────────────────
-    publish_twist: true            # also publish geometry_msgs/Twist on /cmd_vel
-    linear_scale: 1.0              # m/s  at full deflection
-    angular_scale: 1.0             # rad/s at full deflection
+# Axes (Linux joystick indices): 0 stick X, 1 stick Y, 2 twist, 3 slider, 4/5 hat
+axis_x: 0                   # -> linear.y
+axis_y: 1                   # -> linear.x
+axis_yaw: 2                 # -> angular.z
+axis_throttle: 3
 
-    # ── Axis mapping (Linux evdev indices) ──────────────────
-    #   Extreme 3D Pro default:
-    #     0 = X (roll)       → linear.y   (strafe)
-    #     1 = Y (pitch)      → linear.x   (fwd/back)
-    #     2 = Rz (twist)     → angular.z  (yaw)
-    #     3 = Throttle       → linear.z   (up/down)
-    #     4 = Hat X           (not mapped to twist by default)
-    #     5 = Hat Y           (not mapped to twist by default)
-    axis_x: 0
-    axis_y: 1
-    axis_yaw: 2
-    axis_throttle: 3
-
-    # ── Deadman switch ──────────────────────────────────────
-    #   Button that must be held for cmd_vel to be non‑zero.
-    #   0 = trigger (index finger), set to -1 to disable.
-    deadman_btn: 0
+# cmd_vel is zero unless this button is held: 0 trigger, -1 disables the deadman
+deadman_btn: 0

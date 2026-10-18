@@ -1,0 +1,3 @@
+# Logitech Extreme 3D Pro: readable by everyone, plus a fixed name /dev/input/extreme3dpro.
+# sudo cp 99-extreme3dpro.rules /etc/udev/rules.d/ && sudo udevadm control --reload && sudo udevadm trigger
+KERNEL=="js[0-9]*", SUBSYSTEM=="input", ATTRS{idVendor}=="046d", ATTRS{idProduct}=="c215", MODE="0666", SYMLINK+="input/extreme3dpro"
