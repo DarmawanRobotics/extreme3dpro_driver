@@ -36,9 +36,10 @@ jobs:
         if: matrix.distro == 'noetic'
         run: |
           source /opt/ros/noetic/setup.bash
-          catkin_make
-          catkin_make run_tests
-          catkin_test_results build/test_results --verbose
+          run() { "$@" > out.txt 2>&1 || { grep -iE 'error|fail' out.txt | tail -15 | sed 's/^/::error::/'; tail -20 out.txt; exit 1; }; cat out.txt; }
+          run catkin_make
+          run catkin_make run_tests
+          run catkin_test_results build/test_results --verbose
 
       - name: Build and test (ROS 2)
         if: matrix.distro != 'noetic'
